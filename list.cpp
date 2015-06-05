@@ -113,6 +113,7 @@ void sort(head_t *headp)
         for (j = 0; j < i; j++) {
             if (leftp->val > rightp->val) {
                 if (leftp_prev == NULL) {
+                    /* In case of the first node */
                     node_t *tmp;
                     tmp = rightp->next;
                     rightp->next = leftp;
@@ -120,13 +121,17 @@ void sort(head_t *headp)
                     leftp->next = tmp;
                 }
                 else {
+                    /* In case of other nodes */
                     node_t *tmp;
                     tmp = rightp->next;
                     rightp->next = leftp;
                     leftp_prev->next = rightp;
                     leftp->next = tmp;
                 }
-                /* leftp and rightp swapped */
+                /*
+                 * Here, leftp is actually pointing to the right node, and rightp is pointing to
+                 * the left node
+                 */
                 leftp_prev = rightp;
                 leftp = rightp->next;
                 rightp = leftp->next;
